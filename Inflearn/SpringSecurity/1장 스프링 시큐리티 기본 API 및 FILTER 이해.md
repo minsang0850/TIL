@@ -49,3 +49,44 @@ protected void configure(HttpSecurity http) throws Exception {
         .userDetailsService();
 }
 ```
+
+**AnonymousAuthenticationFilter**  
+- 익명 사용자 인증 처리 필터
+- 익명사용자와 인증 사용자를 구분해서 처리하기 위한 용도로 사용
+- 화면에서 인증 여부를 구현할 때 isAnonymous()와 isAuthenticated()로 구분해서 사용
+- 인증 객체를 세션에 저장하지 않는다
+
+
+**동시 세션 제어**  
+```java
+protected void configure(HttpSecurity http) throws Exception {
+    http.sessionManagement()
+        .maximumSessions(1)
+        .maxSessionsPreventsLogin(true) //동시 로그인 차단함, false: 기존 세션 만료(default)
+        .expiredUrl("/expired") //세연이 만료된 경우 이동할 페이지
+        .invalidSessionUrl("/invalid"); //세션이 유효하지 않을 때 이동할 페이지
+}
+```
+
+**세션 고정 보호**  
+인증에 성공할 때마다 새로운 세션 생성
+```java
+protected void configure(HttpSecurity http) throws Exception {
+    http.sessionManagement()
+        .sessionFixation()
+        .changeSessionId(); // none, migrateSession, newSession
+}
+```
+
+
+**세션 정책**
+- Always: 항상
+- If required: 스프링 시큐리티가 필요시 생성(기본값)
+- Never: 생성하지 않지만 이미 존재하면 사용
+- Stateless: 스프링 시큐리티가 생성하지 않고 존재해도 사용하지 않음
+```java
+protected void configure(HttpSecurity http) throws Exception {
+   http.sessionManagement()
+           .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
+}
+```
