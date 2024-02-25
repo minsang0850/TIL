@@ -90,3 +90,29 @@ protected void configure(HttpSecurity http) throws Exception {
            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 }
 ```
+
+**인증 API -SessionManagementFilter**
+1. 세션 관리
+2. 동시적 세션 제어
+3. 세션 고정 보호
+4. 세션 생성 정책
+
+
+**인증 API -ConcurrentSessionFilter**  
+- 매 요청마다 현재 사용자의 세션 만료 여부 체크
+- 세션 만료되었을 경우 즉시 만료 처리
+- session.isExpired()==true
+  - 로그아웃 처리
+  - 즉시 오류 페이지 으답
+
+**인가 API - 권한 설정**
+- 선언적 방식
+  - URL
+    - http.antMatchers
+  - Method
+    - @PreAuthorize
+- 동적 방식 - DB 연동 프로그래밍
+  - URL
+  - Method
+
+
