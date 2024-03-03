@@ -131,3 +131,14 @@ protected void configure(HttpSecurity http) throws Exception {
 ```java
 http.exceptionHandling(); //예외처리 기능이 작동함
 ```
+
+## CSRF
+CSRF(사이트 간 요청 위조)
+
+**CsrfFilter**  
+- 모든 요청에 랜덤하게 생성된 토큰을 HTTP 파라미터로 요구
+- 요청 시 전달되는 토큰 값과 서버에 저장된 실제 값과 비교한 후 만약 일치하지 않으면 요청은 실패한다.
+
+**Spring Security**  
+- http.csrf(): 기본 활성화되어 있음
+
