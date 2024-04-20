@@ -1,0 +1,2 @@
+- Spring WebFlux에서 Streaming 방식으로 데이터를 전송하기 위한 response body 타입은 Flux입니다.
+- SSE를 이용해 이벤트 스트림을 클라이언트로 전송하기 위해서는 ContentType이 'text/event-stream'이어야 합니다.
